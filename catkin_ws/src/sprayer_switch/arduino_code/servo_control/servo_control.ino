@@ -25,7 +25,7 @@ void loop(){
     if(cmd == 'f')
     {
       Serial.println("Finish to spray !");
-      myservo.write(80);
+      myservo.write(70);
     }
   }
   delay(20);

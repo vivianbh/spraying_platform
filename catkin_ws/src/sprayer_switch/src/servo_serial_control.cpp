@@ -15,7 +15,7 @@ int main(int argc, char **argv)
   int baud;
 
   if (!n.getParam("baud", baud)) baud = 57600;
-  if (!n.getParam("port", port)) port = "/dev/ttyACM0";
+  if (!n.getParam("port", port)) port = "/dev/ttyACM5";
   ROS_INFO("baudrate: %d,  port: %s", baud, port.c_str());
 
   try

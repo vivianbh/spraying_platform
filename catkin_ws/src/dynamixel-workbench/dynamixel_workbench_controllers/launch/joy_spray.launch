@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="pkg_name" value="dynamixel_workbench_controllers"/>
+	<arg name="joy_pkg" value="joy"/>
+
+	<node pkg="$(arg joy_pkg)" type="joy_node" name="joy_node_spray" output="screen"/>
+	<node pkg="$(arg pkg_name)" type="joy_control.py" name="joy_control" output="screen"/>
+</launch>

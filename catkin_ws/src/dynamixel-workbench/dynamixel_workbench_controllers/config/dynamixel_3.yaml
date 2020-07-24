@@ -14,9 +14,9 @@ tilt:
   Operating_Mode: 3
   Profile_Acceleration: 5
   Profile_Velocity: 20
-gripper:
-  ID: 3
-  Return_Delay_Time: 0
-  Operating_Mode: 3
-  Profile_Acceleration: 20
-  Profile_Velocity: 50
+  #gripper:
+  #  ID: 3
+  #  Return_Delay_Time: 0
+  #  Operating_Mode: 3
+  #  Profile_Acceleration: 20
+  #  Profile_Velocity: 50
