@@ -99,6 +99,14 @@ target_link_libraries(motion_display2 ${catkin_LIBRARIES})
 add_executable(motion_client src/dynamixel_motion_control.cpp)
 add_dependencies(motion_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(motion_client ${catkin_LIBRARIES})
+
+##add_executable(joy_control src/joy_control.cpp)
+#add_dependencies(joy_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#target_link_libraries(joy_control ${catkin_LIBRARIES})
+
+##add_executable(joy_test src/joy_test.cpp)
+#add_dependencies(joy_test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#target_link_libraries(joy_test ${catkin_LIBRARIES}))
 #################################################################################
 ## Install
 #################################################################################
