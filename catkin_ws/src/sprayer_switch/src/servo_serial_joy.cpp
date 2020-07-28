@@ -3,27 +3,47 @@
 #include <iostream>
 #include <string>
 #include <sensor_msgs/Joy.h>
+#include <std_msgs/Bool.h>
 
 using namespace std;
 
-void cb(const sensor_msgs::Joy cmd)
+string cmd;
+serial::Serial ser;
+
+void cb(const std_msgs::Bool& spray_on)
 {
-  
+  ROS_INFO("Suscribe");
+  if(spray_on.data == true)
+  {
+    cmd = "s";
+  }
+  else
+  {
+    cmd = "f";
+  }
+
+  ser.write(cmd);
+  cout <<  cmd << endl;
+  sleep(1);
+  while (ser.available() > 0)
+    {
+      string msg = ser.read(ser.available());
+      ROS_INFO("%s", msg.c_str());
+    }
 }
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "servo_serial");
+  ros::init(argc, argv, "servo_joy");
   ros::NodeHandle n;
-  serial::Serial ser;
-
-  ros::Subscriber sub = n.subscribe("sensor_msg/Joy", 100, cb);
+//  serial::Serial ser;
 
   string port;
   int baud;
+//  string cmd;
 
   if (!n.getParam("baud", baud)) baud = 57600;
-  if (!n.getParam("port", port)) port = "/dev/ttyACM0";
+  if (!n.getParam("port", port)) port = "/dev/ttyACM1";
   ROS_INFO("baudrate: %d,  port: %s", baud, port.c_str());
 
   try
@@ -49,9 +69,15 @@ int main(int argc, char **argv)
     return -1;
   }
 
+  ros::Subscriber sub = n.subscribe("spray_on", 100, cb);
+/*
   while (ros::ok())
   {
-    ser.write(cmd);
+    ROS_INFO("Start recevieing joy command.");
+
+    sub = n.subscribe("spray_on", 100, cb);
+//    ser.write(cmd);
+    cout <<  cmd << endl;
     sleep(1);
     while (ser.available() > 0)
     {
@@ -59,6 +85,8 @@ int main(int argc, char **argv)
       ROS_INFO("%s", msg.c_str());
     }
   }
+*/
+   ros::spin();
 
   return 0;
 }

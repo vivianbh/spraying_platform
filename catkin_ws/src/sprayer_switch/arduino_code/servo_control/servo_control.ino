@@ -8,7 +8,7 @@ char cmd;
 void setup(){
   Serial.begin(57600);
   myservo.attach(servoPin);
-  myservo.write(80);
+  myservo.write(70);
   Serial.println("Starting ...");
 }
 

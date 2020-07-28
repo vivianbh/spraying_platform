@@ -5,6 +5,7 @@ import subprocess
 import math
 
 from sensor_msgs.msg import Joy
+from std_msgs.msg import Bool
 
 class DriveTeleop:
     def __init__(self):
@@ -13,6 +14,7 @@ class DriveTeleop:
         self.servo_center = (self.servo_max + 1) / 2 # center servo position
 
         self.joy_sub = rospy.Subscriber("joy", Joy, self.on_joy)
+        self.joy_pub = rospy.Publisher("spray_on", Bool, queue_size=10)
 
     def on_joy(self, data):
         # Pan and tilt control (cross)
@@ -28,12 +30,16 @@ class DriveTeleop:
         # Grippper control
         if data.buttons[3]: # gripper open (Y button)
             rospy.loginfo('Open')
+            spray_data = True
+            self.joy_pub.publish(spray_data)
         if data.buttons[1]: # gripper close (A button)
             rospy.loginfo('Close')
 
         # Move to home position
         if data.buttons[2]: # B button
             rospy.loginfo('Move to home position')
+            spray_data = False
+            self.joy_pub.publish(spray_data)
 
 def main():
     rospy.init_node("joy_control")

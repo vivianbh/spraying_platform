@@ -207,3 +207,6 @@ include_directories(
 # catkin_add_nosetests(test)
 add_executable(servo_serial src/servo_serial_control.cpp)
 target_link_libraries(servo_serial ${catkin_LIBRARIES})
+
+add_executable(servo_joy src/servo_serial_joy.cpp)
+target_link_libraries(servo_joy ${catkin_LIBRARIES})
